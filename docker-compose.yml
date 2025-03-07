@@ -1,3 +1,5 @@
+version: "3.8"  # Лучше явно указать версию
+
 services:
   db:
     image: postgres:15
@@ -9,7 +11,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-
   web:
     build:
       context: ./app
@@ -20,14 +21,12 @@ services:
       - DB_NAME=devsrch
       - DB_USER=postgres
       - DB_PASSWORD=Brooklyn11
-      - DB_HOST=devsrch
+      - DB_HOST=db  # Исправили хост
       - DB_PORT=5432
     ports:
       - "8080:8080"
     volumes:
-      - .app:/app
+      - ./app:/app  # Исправленный путь
 
 volumes:
   postgres_data: {}
-
-

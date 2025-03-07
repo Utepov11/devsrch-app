@@ -2,12 +2,15 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+# Устанавливаем зависимости
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Убедитесь, что gunicorn есть в requirements.txt
-RUN pip install gunicorn
-
+# Копируем код после установки зависимостей
 COPY . .
 
-CMD ["gunicorn", "app.wsgi:application", "--bind", "0.0.0.0:8080"]
+# Указываем порт, который будет использоваться
+EXPOSE 8080
+
+# Запускаем сервер Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app.wsgi:application"]
