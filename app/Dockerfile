@@ -11,4 +11,4 @@ COPY . .
 ENV PYTHONUNBUFFERED=1
 
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "myproject.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "myproject.wsgi:application"]
