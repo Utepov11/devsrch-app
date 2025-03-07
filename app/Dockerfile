@@ -1,14 +1,13 @@
-FROM python:3.12
-
+FROM python:3.9-slim
 
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+# Убедитесь, что gunicorn есть в requirements.txt
+RUN pip install gunicorn
 
 COPY . .
 
-ENV PYTHONUNBUFFERED=1
-
-
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "myproject.wsgi:application"]
+CMD ["gunicorn", "app.wsgi:application", "--bind", "0.0.0.0:8080"]
