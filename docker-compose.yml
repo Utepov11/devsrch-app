@@ -12,6 +12,7 @@ services:
 
   web:
     build: .
+    context: ./app.
     restart: always
     depends_on:
       - db
