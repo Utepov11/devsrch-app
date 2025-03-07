@@ -12,7 +12,6 @@ services:
 
   web:
     build: .
-    context: ./app.
     restart: always
     depends_on:
       - db
@@ -26,6 +25,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+    context: .
 
 volumes:
   postgres_data: {}
