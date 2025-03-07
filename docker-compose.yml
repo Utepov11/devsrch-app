@@ -11,7 +11,8 @@ services:
 
 
   web:
-    build: .
+    build:
+      context: ./app
     restart: always
     depends_on:
       - db
@@ -24,8 +25,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
-    context: .
+      - .app:/app
 
 volumes:
   postgres_data: {}
